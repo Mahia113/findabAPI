@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-//require 'conection.php';
+require 'conexion.php';
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -15,7 +15,8 @@ $c['errorHandler'] = function ($c) {
 };
 
 $app = new \Slim\App($c);
-//require 'utils.php';
+require 'utils.php';
+require 'negocio.php';
 
 
 $app->run();

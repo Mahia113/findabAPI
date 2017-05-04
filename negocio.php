@@ -8,15 +8,16 @@
     sendResponse($negocio->toJson(),$res,200);
   });
   $app->post('/negocios',function(Request $req,Response $res,$args){
-    $data = $reques->getParsedBody();
+    $data = $req->getParsedBody();
     $negocio = new Negocio();
-    $negocio->nombre = urfirst($data['nombre']);
-    $negocio->descripcion = ucfist($data['descripcion']);
-    $negocio->logo = ucfist($data['logo']);
+    $negocio->nombre = ucfirst($data['nombre']);
+    $negocio->descripcion = ucfirst($data['descripcion']);
+    $negocio->logo = ucfirst($data['logo']);
     $negocio->portada = $data['portada'];
 		$negocio->direccion = $data['direccion'];
-    $negocio->coordenada_latitud = $data['lat'];
-    $negocio->coordenada_altitud = $data['lng'];
+    $negocio->cordenadas_latitud = $data['lat'];
+    $negocio->cordenadas_altitud = $data['lng'];
+    $negocio->facebook_id = $data['facebook_id'];
     $negocio->web_url = $data['web_url'];
     $negocio->telefono1 = $data['telefono1'];
     $negocio->telefono2 = $data['telefono2'];
@@ -24,8 +25,9 @@
     $negocio->cliente_id = $data['cliente_id'];
     $negocio->ciudad_id = $data['ciudad_id'];
 
+
     if($negocio->save()){
-      return sendResponse($negocio->id,$res,200);
+      return sendResponse($negocio->toJson(),$res,200);
     }
     sendResponse(json_encode(array('message'=>'error')),$res,500);
 

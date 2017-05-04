@@ -16,7 +16,8 @@ $c['errorHandler'] = function ($c) {
 
 $app = new \Slim\App($c);
 require 'utils.php';
-require 'negocio.php';
+require 'views/negocio.php';
+require 'views/cliente.php';
 
 
 $app->run();

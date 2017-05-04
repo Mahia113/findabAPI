@@ -7,5 +7,10 @@
 
     sendResponse($clientes->toJson(),$res,200);
   });
+  $app->get('/clientes/{idCliente}',function(Request $req,Response $res,$args){
+    $idCliente = $args['clientes'];
+    $cliente = Cliente::findOrFail($idCliente);
+    sendResponse($cliente->toJson(),$res,200);
+  });
 
 ?>

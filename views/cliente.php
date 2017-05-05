@@ -38,4 +38,16 @@
       }
       sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
   });
+  $app->put('/clientes',function(Request $req,Response $res,$args){
+    $data = $req->getParsedBody();
+    $idCliente = $data['idCliente'];
+    $activar = $data['activar'];
+    $cliente = Cliente::where('id','=',$idCliente)->first();
+    if($cliente){
+      $cliente->habilitado = $activar;
+      $cliente->save();
+      return sendResponse($cliente->toJson(),$res,200);
+    }
+    sendResponse(json_encode(array('message','No se encontro el cliente '.$idCliente)),$res,500);
+  });
 ?>

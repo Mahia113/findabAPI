@@ -33,8 +33,6 @@
         return sendResponse($horario->toJson(),$res,200);
       }
       sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
-
-
     });
 
 ?>

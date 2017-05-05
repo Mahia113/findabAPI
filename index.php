@@ -19,6 +19,7 @@ require 'utils.php';
 require 'views/negocio.php';
 require 'views/cliente.php';
 require 'views/horario.php';
+require 'views/tiempo.php';
 
 
 $app->run();

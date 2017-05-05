@@ -15,7 +15,7 @@
   $app->post('/clientes',function(Request $req,Response $res,$args){
       $data = $req->getParsedBody();
       $cliente = Cliente::where('correo',$data['correo'])->get();
-      if($cliente){
+      if(count($cliente)>0){
         return sendResponse(json_encode(array('message'=>'Ya existe en la base de datos')),$res,500);
       }
       $cliente = new Cliente();
@@ -43,7 +43,7 @@
     $idCliente = $data['idCliente'];
     $activar = $data['activar'];
     $cliente = Cliente::where('id','=',$idCliente)->first();
-    if($cliente){
+    if(count($cliente)>0){
       $cliente->habilitado = $activar;
       $cliente->save();
       return sendResponse($cliente->toJson(),$res,200);

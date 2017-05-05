@@ -18,6 +18,7 @@ $app = new \Slim\App($c);
 require 'utils.php';
 require 'views/negocio.php';
 require 'views/cliente.php';
+require 'views/horario.php';
 
 
 $app->run();

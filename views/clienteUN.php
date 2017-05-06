@@ -4,10 +4,15 @@
   $app->get('/negocio/clienteUN/{NegocioId}',function(Request $req,Response $res,$args){
     $NegocioId = $args['NegocioId'];
     $clienteun = ClienteUN::where('negocio_id','=',$NegocioId)->where('habilitado','=',1)->get();
-    if($clienteun->isEmpty()) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,500);
+    if($clienteun->isEmpty()) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,404);
     sendResponse($clienteun->toJson(),$res,200);
   });
-  $app->get();
+  $app->get('/negocio/clienteUN/id/{id}',function(Request $req,Response $res,$args){
+    $id = $args['id'];
+    $cliente = ClienteUN::where('id','=',$id)->where('habilitado','=',1)->get();
+    if($cliente->isEmpty()) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,404);
+    sendResponse($cliente->toJson(),$res,200);
+  });
   $app->post('/negocio/clienteUN',function(Request $req,Response $res,$args){
     $data = $req->getParsedBody();
     $cliente = new ClienteUN();
@@ -25,6 +30,8 @@
       return sendResponse($cliente->toJson(),$res,200);
     }
     sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
-
+  });
+  $app->put('/negocio/clienteUN',function(Request $req,Response $res,$args){
+    
   });
 ?>

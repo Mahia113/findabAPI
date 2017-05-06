@@ -15,6 +15,9 @@
   });
   $app->post('/negocio/clienteUN',function(Request $req,Response $res,$args){
     $data = $req->getParsedBody();
+    $cun = ClienteUN::where('correo','=',$data['correo'])->get();
+    if(count($cun)>0) return sendResponse(json_encode(array('message'=>'Ese correo ya existe')),$res,500);
+    
     $cliente = new ClienteUN();
     $cliente->nombre = $data['nombre'];
     $cliente->apellidos = $data['apellidos'];
@@ -25,6 +28,7 @@
     $cliente->c_tipo_usuario_id = $data['c_tipo_usuario_id'];
     $cliente->negocio_id = $data['negocio_id'];
     $cliente->negocio_cliente_id = $data['negocio_cliente_id'];
+
 
     if($cliente->save()){
       return sendResponse($cliente->toJson(),$res,200);
@@ -38,7 +42,7 @@
     $cun = ClienteUN::find($idClienteUN);
     if(count($cun)<=0) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,404);
     $cun->habilitado = $habilitado;
-    if($cun->save()) return sendResponse($cun->toJson(),$req,200);
-    sendResponse(json_encode(array('message'=>'Ocurrio un error')),$req,500);
+    if($cun->save()) return sendResponse($cun->toJson(),$res,200);
+    sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
   });
 ?>

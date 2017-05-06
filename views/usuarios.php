@@ -9,7 +9,7 @@
   });
   $app->get('/usuarios/{id}',function(Request $req,Response $res,$args){
     $id = $args['id'];
-    $usuarios = Usuario::where('id','=',$id);
+    $usuarios = Usuario::where('id','=',$id)->get();
     if(count($usuarios)<=0) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,404);
     sendResponse($usuarios->toJson(),$res,200);
   });
@@ -22,7 +22,7 @@
     $usuario->foto_perfil = $data['foto_perfil'];
     $usuario->telefono = $data['telefono'];
     $usuario->id_facebook = $data['id_facebook'];
-    $usuario->c_genero_id = $data['c_id_genero'];
+    $usuario->c_genero_id = $data['c_genero_id'];
 
     if($usuario->save()) return sendResponse($usuario->toJson(),$res,200);
     sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);

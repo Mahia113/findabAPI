@@ -21,6 +21,7 @@ require 'views/cliente.php';
 require 'views/horario.php';
 require 'views/tiempo.php';
 require 'views/clienteUN.php';
+require 'views/usuarios.php';
 
 
 $app->run();

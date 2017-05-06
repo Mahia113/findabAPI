@@ -11,4 +11,5 @@ return array(
     'Horario' => $baseDir . '/models/Horario.php',
     'Negocio' => $baseDir . '/models/Negocio.php',
     'Tiempo' => $baseDir . '/models/Tiempo.php',
+    'Usuario' => $baseDir . '/models/Usuario.php',
 );

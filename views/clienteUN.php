@@ -32,6 +32,13 @@
     sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
   });
   $app->put('/negocio/clienteUN',function(Request $req,Response $res,$args){
-    
+    $data = $req->getParsedBody();
+    $habilitado = $data['habilidado'];
+    $idClienteUN = $data['idUN'];
+    $cun = ClienteUN::find($idClienteUN);
+    if(count($cun)<=0) return sendResponse(json_encode(array('message'=>'No se encontro')),$res,404);
+    $cun->habilitado = $habilitado;
+    if($cun->save()) return sendResponse($cun->toJson(),$req,200);
+    sendResponse(json_encode(array('message'=>'Ocurrio un error')),$req,500);
   });
 ?>

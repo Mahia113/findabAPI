@@ -19,6 +19,13 @@
     $usuario->nombre = $data['nombre'];
     $usuario->apellidos = $data['apellidos'];
     $usuario->correo = $data['correo'];
+    $usuario->foto_perfil = $data['foto_perfil'];
+    $usuario->telefono = $data['telefono'];
+    $usuario->id_facebook = $data['id_facebook'];
+    $usuario->c_genero_id = $data['c_id_genero'];
+
+    if($usuario->save()) return sendResponse($usuario->toJson(),$res,200);
+    sendResponse(json_encode(array('message'=>'Ocurrio un error')),$res,500);
   });
 
 ?>

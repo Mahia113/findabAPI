@@ -5,7 +5,7 @@
   $app->get('/usuarios',function(Request $req,Response $res,$args){
     $usuarios = Usuario::get();
     if(count($usuarios)<=0) return sendResponse(json_encode(array('message'=>'No se encontro nada')),$res,404);
-    sendResponse($usuarios->toJson(),$req,200);
+    sendResponse($usuarios->toJson(),$res,200);
   });
   $app->get('/usuarios/{id}',function(Request $req,Response $res,$args){
     $id = $args['id'];
